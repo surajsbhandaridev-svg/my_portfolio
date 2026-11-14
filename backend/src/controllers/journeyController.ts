@@ -35,6 +35,7 @@ export const updateJourney = async (req: Request, res: Response, next: NextFunct
         ...req.body,
         updatedAt: new Date(),
       };
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Journey content updated.', data: inMemoryStore.journeyContent });
     }
   } catch (error) {

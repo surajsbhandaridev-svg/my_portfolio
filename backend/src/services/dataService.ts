@@ -9,11 +9,17 @@ import { BeyondCode, IBeyondCode } from '../models/BeyondCode';
 import { Admin, IAdmin } from '../models/Admin';
 import bcrypt from 'bcryptjs';
 
+import fs from 'fs';
+import path from 'path';
+
 export const isDbConnected = (): boolean => {
   return mongoose.connection.readyState === 1;
 };
 
-// In-memory fallback stores populated with initial authentic seed data
+const DATA_DIR = path.join(process.cwd(), 'data');
+const DATA_FILE = path.join(DATA_DIR, 'store.json');
+
+// Persistent JSON File Store (Zero-config embedded DB fallback)
 class InMemoryStore {
   projects: any[] = [];
   skills: any[] = [];
@@ -25,7 +31,56 @@ class InMemoryStore {
   admins: any[] = [];
 
   constructor() {
+    this.init();
+  }
+
+  init() {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      if (fs.existsSync(DATA_FILE)) {
+        const raw = fs.readFileSync(DATA_FILE, 'utf-8');
+        const parsed = JSON.parse(raw);
+        this.projects = parsed.projects || [];
+        this.skills = parsed.skills || [];
+        this.education = parsed.education || [];
+        this.messages = parsed.messages || [];
+        this.siteSettings = parsed.siteSettings || null;
+        this.journeyContent = parsed.journeyContent || null;
+        this.beyondCode = parsed.beyondCode || [];
+        this.admins = parsed.admins || [];
+        console.log('📦 Loaded existing portfolio database from data/store.json');
+        return;
+      }
+    } catch (err) {
+      console.warn('Could not read existing store.json, re-seeding...', err);
+    }
+
     this.seedInitial();
+    this.saveToFile();
+  }
+
+  saveToFile() {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+      const dataToSave = {
+        projects: this.projects,
+        skills: this.skills,
+        education: this.education,
+        messages: this.messages,
+        siteSettings: this.siteSettings,
+        journeyContent: this.journeyContent,
+        beyondCode: this.beyondCode,
+        admins: this.admins,
+      };
+      fs.writeFileSync(DATA_FILE, JSON.stringify(dataToSave, null, 2), 'utf-8');
+    } catch (err) {
+      console.error('Failed to save data/store.json:', err);
+    }
   }
 
   seedInitial() {

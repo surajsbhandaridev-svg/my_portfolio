@@ -105,6 +105,7 @@ export const createProject = async (req: Request, res: Response, next: NextFunct
         updatedAt: new Date(),
       };
       inMemoryStore.projects.push(newProject);
+      inMemoryStore.saveToFile();
       res.status(201).json({ success: true, message: 'Project created successfully.', data: newProject });
     }
   } catch (error) {
@@ -139,6 +140,7 @@ export const updateProject = async (req: Request, res: Response, next: NextFunct
         ...updateData,
         updatedAt: new Date(),
       };
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Project updated successfully.', data: inMemoryStore.projects[index] });
     }
   } catch (error) {
@@ -164,6 +166,7 @@ export const deleteProject = async (req: Request, res: Response, next: NextFunct
         return;
       }
       inMemoryStore.projects.splice(index, 1);
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Project deleted successfully.' });
     }
   } catch (error) {

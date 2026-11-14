@@ -56,6 +56,7 @@ export const createEducation = async (req: Request, res: Response, next: NextFun
         updatedAt: new Date(),
       };
       inMemoryStore.education.push(record);
+      inMemoryStore.saveToFile();
       res.status(201).json({ success: true, message: 'Education record added.', data: record });
     }
   } catch (error) {
@@ -90,6 +91,7 @@ export const updateEducation = async (req: Request, res: Response, next: NextFun
         ...updateData,
         updatedAt: new Date(),
       };
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Education record updated.', data: inMemoryStore.education[index] });
     }
   } catch (error) {
@@ -115,6 +117,7 @@ export const deleteEducation = async (req: Request, res: Response, next: NextFun
         return;
       }
       inMemoryStore.education.splice(index, 1);
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Education record deleted.' });
     }
   } catch (error) {

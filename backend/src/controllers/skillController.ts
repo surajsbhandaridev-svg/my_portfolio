@@ -65,6 +65,7 @@ export const createSkill = async (req: Request, res: Response, next: NextFunctio
         updatedAt: new Date(),
       };
       inMemoryStore.skills.push(newSkill);
+      inMemoryStore.saveToFile();
       res.status(201).json({ success: true, message: 'Skill added successfully.', data: newSkill });
     }
   } catch (error) {
@@ -94,6 +95,7 @@ export const updateSkill = async (req: Request, res: Response, next: NextFunctio
         ...req.body,
         updatedAt: new Date(),
       };
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Skill updated successfully.', data: inMemoryStore.skills[index] });
     }
   } catch (error) {
@@ -119,6 +121,7 @@ export const deleteSkill = async (req: Request, res: Response, next: NextFunctio
         return;
       }
       inMemoryStore.skills.splice(index, 1);
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Skill deleted successfully.' });
     }
   } catch (error) {

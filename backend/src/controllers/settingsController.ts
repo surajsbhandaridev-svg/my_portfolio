@@ -40,6 +40,7 @@ export const updateSettings = async (req: Request, res: Response, next: NextFunc
         ...updateData,
         updatedAt: new Date(),
       };
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Settings updated successfully.', data: inMemoryStore.siteSettings });
     }
   } catch (error) {

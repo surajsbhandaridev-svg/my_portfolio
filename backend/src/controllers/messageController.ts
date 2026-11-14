@@ -48,6 +48,7 @@ export const sendMessage = async (req: Request, res: Response, next: NextFunctio
         updatedAt: new Date(),
       };
       inMemoryStore.messages.unshift(saved);
+      inMemoryStore.saveToFile();
       res.status(201).json({
         success: true,
         message: 'Thank you! Your message has been recorded into the engineering journal. Suraj will get back to you shortly.',
@@ -112,6 +113,7 @@ export const markMessageRead = async (req: Request, res: Response, next: NextFun
         return;
       }
       msg.isRead = readState;
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Message updated.', data: msg });
     }
   } catch (error) {
@@ -137,6 +139,7 @@ export const deleteMessage = async (req: Request, res: Response, next: NextFunct
         return;
       }
       inMemoryStore.messages.splice(index, 1);
+      inMemoryStore.saveToFile();
       res.json({ success: true, message: 'Message deleted successfully.' });
     }
   } catch (error) {
