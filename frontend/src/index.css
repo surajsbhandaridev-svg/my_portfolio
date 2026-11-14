@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --line-color: #2e2e2e;
+  --line-gap: 28px;
+  --bg-color: #101010;
+}
+
+/* Notebook Paper Ruled Lines Background */
+.notebook-ruled-bg {
+  background-color: var(--bg-color);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent calc(var(--line-gap) - 1px),
+    var(--line-color) calc(var(--line-gap) - 1px),
+    var(--line-color) var(--line-gap)
+  );
+  background-size: 100% var(--line-gap);
+  background-attachment: local;
+}
+
+/* Subtle paper grain texture overlay */
+.paper-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Torn paper edge effect */
+.torn-edge-bottom {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 92%,
+    96% 96%,
+    92% 90%,
+    88% 95%,
+    84% 91%,
+    80% 97%,
+    75% 92%,
+    70% 96%,
+    65% 90%,
+    60% 95%,
+    55% 92%,
+    50% 97%,
+    45% 91%,
+    40% 96%,
+    35% 90%,
+    30% 95%,
+    25% 92%,
+    20% 97%,
+    15% 91%,
+    10% 95%,
+    5% 91%,
+    0% 96%
+  );
+}
+
+.torn-edge-right {
+  clip-path: polygon(
+    0% 0%,
+    95% 0%,
+    98% 4%,
+    94% 8%,
+    97% 12%,
+    93% 16%,
+    98% 21%,
+    94% 26%,
+    97% 32%,
+    93% 38%,
+    98% 44%,
+    94% 50%,
+    97% 56%,
+    93% 62%,
+    98% 68%,
+    94% 74%,
+    97% 80%,
+    93% 86%,
+    98% 92%,
+    95% 100%,
+    0% 100%
+  );
+}
+
+/* Realistic translucent scotch tape decoration */
+.tape-strip {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  transform: rotate(-3deg);
+  border-left: 2px dashed rgba(255,255,255,0.3);
+  border-right: 2px dashed rgba(255,255,255,0.3);
+}
+
+/* Hand-drawn scribble underline */
+.scribble-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.scribble-underline::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  bottom: -4px;
+  width: 104%;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0,5 Q25,0 50,6 T100,4' fill='none' stroke='%23F2A6AC' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
+
+/* Handwritten circle badge */
+.hand-drawn-circle {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.hand-drawn-pill {
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  padding: 4px 16px;
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101010;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F2A6AC;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
