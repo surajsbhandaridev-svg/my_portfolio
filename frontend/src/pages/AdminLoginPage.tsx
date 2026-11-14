@@ -98,13 +98,6 @@ export const AdminLoginPage: React.FC = () => {
           </button>
         </form>
 
-        {/* Quick Credentials Hint for Reviewer / User */}
-        <div className="p-3 bg-zinc-900/80 rounded border border-zinc-800 text-[11px] font-mono text-zinc-400 space-y-1">
-          <div className="text-zinc-300 font-semibold">Initial Seed Credentials:</div>
-          <div>Email: <code className="text-[#76A9FF]">admin@surajsinghbhandari.dev</code></div>
-          <div>Password: <code className="text-[#8FCF9B]">Admin@Sketchbook2026!</code></div>
-        </div>
-
         {/* Return to website */}
         <div className="text-center pt-2">
           <Link
