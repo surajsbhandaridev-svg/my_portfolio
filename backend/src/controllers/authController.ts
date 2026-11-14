@@ -15,6 +15,10 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const envEmail = (process.env.ADMIN_EMAIL || 'admin@surajsinghbhandari.dev').trim().toLowerCase();
+    const envPassword = process.env.ADMIN_PASSWORD || 'Admin@Sketchbook2026!';
+    const isDirectEnvMatch = normalizedEmail === envEmail && password === envPassword;
+
     let adminRecord: any = null;
 
     if (isDbConnected()) {
@@ -23,12 +27,22 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
       adminRecord = inMemoryStore.admins.find((a) => a.email === normalizedEmail);
     }
 
+    // If direct env match is true, grant access even if DB is still syncing
+    if (!adminRecord && isDirectEnvMatch) {
+      adminRecord = {
+        _id: 'admin_1',
+        email: envEmail,
+        role: 'admin',
+        name: 'Suraj Singh Bhandari',
+      };
+    }
+
     if (!adminRecord) {
       res.status(401).json({ success: false, message: 'Invalid email or password.' });
       return;
     }
 
-    const isMatch = await bcrypt.compare(password, adminRecord.passwordHash);
+    const isMatch = isDirectEnvMatch || (adminRecord.passwordHash && (await bcrypt.compare(password, adminRecord.passwordHash)));
     if (!isMatch) {
       res.status(401).json({ success: false, message: 'Invalid email or password.' });
       return;

@@ -52,6 +52,7 @@ class InMemoryStore {
         this.beyondCode = parsed.beyondCode || [];
         this.admins = parsed.admins || [];
         console.log('📦 Loaded existing portfolio database from data/store.json');
+        this.syncEnvAdmin();
         return;
       }
     } catch (err) {
@@ -60,6 +61,39 @@ class InMemoryStore {
 
     this.seedInitial();
     this.saveToFile();
+  }
+
+  syncEnvAdmin() {
+    try {
+      const email = (process.env.ADMIN_EMAIL || 'admin@surajsinghbhandari.dev').trim().toLowerCase();
+      const password = process.env.ADMIN_PASSWORD || 'Admin@Sketchbook2026!';
+      const salt = bcrypt.genSaltSync(10);
+      const passwordHash = bcrypt.hashSync(password, salt);
+
+      const existingIndex = this.admins.findIndex(
+        (a) => a.email === email || a.role === 'admin'
+      );
+
+      if (existingIndex >= 0) {
+        this.admins[existingIndex].email = email;
+        this.admins[existingIndex].passwordHash = passwordHash;
+        this.admins[existingIndex].updatedAt = new Date();
+      } else {
+        this.admins.push({
+          _id: 'admin_1',
+          email,
+          passwordHash,
+          role: 'admin',
+          name: 'Suraj Singh Bhandari',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+      }
+      this.saveToFile();
+      console.log(`🔐 Admin credentials synchronized with environment variables: ${email}`);
+    } catch (e) {
+      console.error('Error synchronizing admin credentials:', e);
+    }
   }
 
   saveToFile() {

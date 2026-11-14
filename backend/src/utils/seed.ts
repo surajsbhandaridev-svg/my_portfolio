@@ -19,20 +19,25 @@ export const seedDatabaseIfEmpty = async (): Promise<void> => {
   }
 
   try {
-    const adminCount = await Admin.countDocuments();
-    if (adminCount === 0) {
-      console.log('🌱 Seeding initial admin and portfolio records into MongoDB...');
-      const salt = await bcrypt.genSalt(10);
-      const password = process.env.ADMIN_PASSWORD || 'Admin@Sketchbook2026!';
-      const passwordHash = await bcrypt.hash(password, salt);
+    const adminEmail = (process.env.ADMIN_EMAIL || 'admin@surajsinghbhandari.dev').toLowerCase();
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@Sketchbook2026!';
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(adminPassword, salt);
 
+    const existingAdmin = await Admin.findOne({ email: adminEmail });
+    if (!existingAdmin) {
+      console.log('🌱 Seeding admin record into MongoDB...');
       await Admin.create({
-        email: (process.env.ADMIN_EMAIL || 'admin@surajsinghbhandari.dev').toLowerCase(),
+        email: adminEmail,
         passwordHash,
         role: 'admin',
         name: 'Suraj Singh Bhandari',
       });
-      console.log(`✅ Admin account seeded: ${process.env.ADMIN_EMAIL || 'admin@surajsinghbhandari.dev'}`);
+      console.log(`✅ Admin account seeded: ${adminEmail}`);
+    } else if (process.env.ADMIN_PASSWORD) {
+      existingAdmin.passwordHash = passwordHash;
+      await existingAdmin.save();
+      console.log(`✅ Admin password synced with environment variables for ${adminEmail}`);
     }
 
     const projectCount = await Project.countDocuments();
