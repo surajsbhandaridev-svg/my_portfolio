@@ -57,6 +57,26 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // General rate limiter
 app.use('/api', apiLimiter);
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    system: "Suraj Singh Bhandari's Engineering Journal API",
+    message: 'Backend API is running live!',
+    endpoints: {
+      health: '/api/health',
+      projects: '/api/projects',
+      skills: '/api/skills',
+      education: '/api/education',
+      journey: '/api/journey',
+      beyondCode: '/api/beyond-code',
+      settings: '/api/site-settings',
+      contact: 'POST /api/contact',
+    },
+    note: 'For the interactive portfolio UI, visit your deployed frontend web app.',
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
