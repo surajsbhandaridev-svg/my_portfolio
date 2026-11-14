@@ -2,7 +2,7 @@
 
 > *"Building. Breaking. Learning. Engineering."*  
 > **B.Tech CSE Student · Aspiring Software Engineer · Full-Stack Developer**  
-> Graphic Era University (GEU '28) · Dehradun, Uttarakhand
+> Graphic Era Hill University (GEHU '28) · Dehradun, Uttarakhand
 
 ---
 
@@ -158,7 +158,7 @@ The portfolio will launch at `http://localhost:5173`.
 Once logged in, the admin can:
 1. Create, edit, and delete **Projects** (with category, technologies, image, and repository links)
 2. Add, modify, and delete **Skills** across 6 categories (Proficient, Learning, Exploring)
-3. Maintain **Education Timeline** milestones for Graphic Era University
+3. Maintain **Education Timeline** milestones for Graphic Era Hill University (GEHU)
 4. Edit the **Journey story, background, and goals**
 5. Curate **Beyond Code** entries (photographs, notes, and tags)
 6. Review, mark as read, and delete received **Contact Messages**

@@ -94,7 +94,7 @@ export const CpuProcessor3D: React.FC = () => {
 
       ctx.font = '22px monospace';
       ctx.fillStyle = '#76A9FF';
-      ctx.fillText('CSE-GEU // x86_64', 256, 230);
+      ctx.fillText('CSE-GEHU // x86_64', 256, 230);
 
       ctx.font = '16px monospace';
       ctx.fillStyle = '#F2A6AC';

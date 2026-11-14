@@ -228,7 +228,7 @@ export const HomePage: React.FC = () => {
               <ul className="space-y-2 font-handwriting text-base">
                 <li className="flex items-center gap-1.5">
                   <span className="text-emerald-700 font-bold">☑</span>
-                  <span>B.Tech CSE @ GEU</span>
+                  <span>B.Tech CSE @ GEHU</span>
                 </li>
                 <li className="flex items-center gap-1.5">
                   <span className="text-emerald-700 font-bold">☑</span>

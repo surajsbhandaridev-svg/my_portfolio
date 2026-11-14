@@ -725,7 +725,7 @@ export const AdminDashboardPage: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <span className="text-xs text-zinc-400">
-                Manage academic timeline, Graphic Era University, and coursework milestones.
+                Manage academic timeline, Graphic Era Hill University (GEHU), and coursework milestones.
               </span>
               <button
                 onClick={() => {

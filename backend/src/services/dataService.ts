@@ -284,7 +284,7 @@ class InMemoryStore {
     this.education = [
       {
         _id: 'edu_1',
-        institution: 'Graphic Era University (GEU)',
+        institution: 'Graphic Era Hill University (GEHU)',
         degree: 'Bachelor of Technology (B.Tech)',
         field: 'Computer Science & Engineering',
         startDate: '2024',
@@ -327,7 +327,7 @@ class InMemoryStore {
       resumeUrl: '/resume.pdf',
       statusText: 'SYSTEM ONLINE // SCROLL TO EXPLORE',
       quickFacts: [
-        'B.Tech CSE Student @ GEU',
+        'B.Tech CSE Student @ GEHU',
         'DSA Enthusiast',
         'Full-Stack Developer',
         'Project Builder',

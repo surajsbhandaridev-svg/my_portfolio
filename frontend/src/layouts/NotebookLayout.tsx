@@ -36,7 +36,7 @@ export const NotebookLayout: React.FC = () => {
           <span className="italic">Personal Engineering Journal</span>
         </div>
         <div className="text-right">
-          <span className="font-mono text-xs md:text-sm text-[#76A9FF]">B.Tech CSE — GEU '28</span>
+          <span className="font-mono text-xs md:text-sm text-[#76A9FF]">B.Tech CSE — GEHU '28</span>
         </div>
       </div>
 
@@ -122,7 +122,7 @@ export const NotebookLayout: React.FC = () => {
         <div className="max-w-7xl mx-auto lg:pl-64 mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#BDB5B9] font-handwriting">
           <p>© {new Date().getFullYear()} Suraj Singh Bhandari. Handcrafted with clean code and engineering curiosity.</p>
           <p className="font-mono text-[11px] text-white/40 mt-2 sm:mt-0">
-            GEU CSE // Dehradun, Uttarakhand
+            GEHU CSE // Dehradun, Uttarakhand
           </p>
         </div>
       </footer>

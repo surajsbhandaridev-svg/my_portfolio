@@ -95,7 +95,7 @@ export const EducationPage: React.FC = () => {
       {/* University Information Sticky Note */}
       <div className="p-5 rounded-sm bg-[#EAE0D5] text-[#1c1917] max-w-md shadow-lg transform -rotate-1 font-handwriting">
         <div className="font-bold text-xl border-b border-black/15 pb-1 mb-2 flex items-center gap-2">
-          <MapPin size={18} /> Graphic Era University (GEU)
+          <MapPin size={18} /> Graphic Era Hill University (GEHU)
         </div>
         <p className="text-base leading-snug">
           Dehradun, Uttarakhand, India. B.Tech Computer Science Engineering cohort 2024–2028. Focused on system architecture, algorithms, and applied software engineering.
